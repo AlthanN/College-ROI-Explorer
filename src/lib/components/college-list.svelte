@@ -27,7 +27,7 @@
 	// When a college is picked in the scatterplot, bring its row into view.
 	function revealIfSelected(id: number) {
 		return (node: HTMLElement) => {
-			if (id === selectedId) node.scrollIntoView({ block: 'nearest' });
+			if (id === selectedId) node.scrollIntoView({ block: 'center' });
 		};
 	}
 </script>

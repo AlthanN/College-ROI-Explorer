@@ -5,6 +5,7 @@
 	import CollegeList from '#lib/components/college-list.svelte';
 	import MajorsChart from '#lib/components/majors-chart.svelte';
 	import CollegeDetails from '#lib/components/college-details.svelte';
+	import { page } from '$app/state';
 	import { getColleges } from '#lib/data.remote.js';
 	import { CONTROL_COLORS, CONTROL_LABELS } from '#lib/format.js';
 	import type { College, Control } from '#lib/types.js';
@@ -16,13 +17,17 @@
 	const states = [...new Set(colleges.map((c) => c.state))].sort();
 	const allTypes = ['1', '2', '3'];
 
-	let stateCode = $state('all');
+	// A view can be opened from a link, e.g. ?state=MA&college=166629&major=1107
+	const params = page.url.searchParams;
+	const linkedCollege = colleges.find((c) => c.id === Number(params.get('college')));
+
+	let stateCode = $state(params.get('state') ?? 'all');
 	let types = $state([...allTypes]);
 	let priceRange = $state([0, priceMax]);
 	let search = $state('');
 
-	let selectedId = $state<number | null>(null);
-	let selectedCip = $state<string | null>(null);
+	let selectedId = $state<number | null>(linkedCollege?.id ?? null);
+	let selectedCip = $state<string | null>(linkedCollege ? params.get('major') : null);
 	let hoveredId = $state<number | null>(null);
 
 	const isShown = $derived.by(() => {
