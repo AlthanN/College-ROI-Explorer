@@ -38,6 +38,14 @@
 	--sidebar-accent-foreground: oklch(0.205 0 0);
 	--sidebar-border: oklch(0.922 0 0);
 	--sidebar-ring: oklch(0.708 0 0);
+	/* Chart colors: college type, plus neutral ink for single-series marks */
+	--type-public: #2a78d6;
+	--type-nonprofit: #eb6834;
+	--type-forprofit: #1baf7a;
+	--chart-ink: oklch(0.32 0 0);
+	--chart-faint: oklch(0.88 0 0);
+	--chart-grid: oklch(0.93 0 0);
+	--chart-band: oklch(0.975 0 0);
 }
 
 .dark {
@@ -72,6 +80,13 @@
 	--sidebar-accent-foreground: oklch(0.985 0 0);
 	--sidebar-border: oklch(1 0 0 / 10%);
 	--sidebar-ring: oklch(0.556 0 0);
+	--type-public: #3987e5;
+	--type-nonprofit: #d95926;
+	--type-forprofit: #199e70;
+	--chart-ink: oklch(0.86 0 0);
+	--chart-faint: oklch(0.32 0 0);
+	--chart-grid: oklch(0.25 0 0);
+	--chart-band: oklch(0.18 0 0);
 }
 
 @theme inline {
@@ -85,6 +100,13 @@
 	--color-sidebar-foreground: var(--sidebar-foreground);
 	--color-sidebar: var(--sidebar);
 	--color-chart-5: var(--chart-5);
+	--color-type-public: var(--type-public);
+	--color-type-nonprofit: var(--type-nonprofit);
+	--color-type-forprofit: var(--type-forprofit);
+	--color-chart-ink: var(--chart-ink);
+	--color-chart-faint: var(--chart-faint);
+	--color-chart-grid: var(--chart-grid);
+	--color-chart-band: var(--chart-band);
 	--color-chart-4: var(--chart-4);
 	--color-chart-3: var(--chart-3);
 	--color-chart-2: var(--chart-2);
@@ -125,5 +147,13 @@
 	}
 	html {
 		@apply font-sans;
+		color-scheme: light;
+		scrollbar-color: var(--border) transparent;
+	}
+	html.dark {
+		color-scheme: dark;
+	}
+	::selection {
+		background: color-mix(in oklch, var(--type-public) 28%, transparent);
 	}
 }
